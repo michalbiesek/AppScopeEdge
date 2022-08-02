@@ -17,6 +17,16 @@ services:
       - /var/run/appscope:/var/run/appscope
       - shared-appscope:/usr/local/lib
 
+  # redis02:
+  #   container_name: redis02
+  #   restart: always
+  #   image: "redis:${REDIS_VERSION:-7.0.4}-alpine"
+  #   environment:
+  #     - LD_PRELOAD=/usr/local/lib/libscope.so
+  #   volumes:
+  #     - /var/run/appscope:/var/run/appscope
+  #     - shared-appscope:/usr/local/lib
+
   edge01:  
     container_name: edge01
     image: "cribl/cribl:${EDGE_VERSION:-3.5.0}"
