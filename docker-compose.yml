@@ -26,7 +26,7 @@ services:
       - /opt/cribl-edge/state/:/var/run/appscope
       - shared-appscopelib:/usr/local/lib
       - shared-appscopebin:/usr/local/scope
-      - /var/run/appscope:/var/run/appscope
+      # - /var/run/appscope:/var/run/appscope
 
   # redis02:
   #   container_name: redis02
