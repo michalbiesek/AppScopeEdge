@@ -5,12 +5,16 @@ services:
     container_name: appscope01
     image: "cribl/scope:${APPSCOPE_VERSION:-1.1.1}"
     volumes:
-      - shared-appscope:/usr/local/lib
+      - shared-appscopelib:/usr/local/lib
+      - shared-appscopebin:/usr/local/scope/x86_64/
 
   redis01:
     container_name: redis01
     restart: always
     image: "redis:${REDIS_VERSION:-7.0.4}"
+    volumes:
+      - shared-appscopelib:/usr/local/lib
+      - shared-appscopebin:/usr/local/scope
 
   redis02:
     container_name: redis02
@@ -19,8 +23,10 @@ services:
     environment:
       - LD_PRELOAD=/usr/local/lib/libscope.so
     volumes:
+      - /opt/cribl-edge/state/:/var/run/appscope
+      - shared-appscopelib:/usr/local/lib
+      - shared-appscopebin:/usr/local/scope
       - /var/run/appscope:/var/run/appscope
-      - shared-appscope:/usr/local/lib
 
   # redis02:
   #   container_name: redis02
@@ -45,4 +51,5 @@ services:
   #     - /var/run/appscope:/var/run/appscope
 
 volumes:
-  shared-appscope:
+  shared-appscopelib:
+  shared-appscopebin:
